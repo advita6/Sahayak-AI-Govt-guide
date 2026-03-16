@@ -1,4 +1,4 @@
-# GovGuide
+# 🏛️ GovGuide AI
 
 **Guidance for Government Applications**
 
@@ -21,116 +21,152 @@ GovGuide solves this by providing **visual guidance and document preparation too
 
 ---
 
-## Key Features
+## ✅ Features
 
-### Form Guides
-Step-by-step visual guides explaining how to complete government applications.
-
-Currently supported:
-- PAN Card Application
-
-Planned guides:
-- Driving License
-- Passport
-- Scholarships
+- **📋 Form Guides** — Visual step-by-step guides for PAN Card (+ more coming soon)
+- **🛠️ Document Tools** — Passport photo resizer, signature resizer, PDF compressor
+- **🤖 AI Assistant** — Chatbot that answers questions about government forms
+- **📱 Responsive** — Works on desktop and mobile
 
 ---
 
-### Document Preparation Tools
+## 🚀 Quick Start
 
-Tools to prepare documents before uploading them on government portals.
+### 1. Extract and enter the project
 
-- Passport photo resizer
-- Signature resizer
-- PDF compressor
+```bash
+unzip govguide-ai.zip
+cd govguide-ai
+```
 
-These tools automatically convert files to the required format.
+### 2. Install dependencies
 
----
+```bash
+npm install
+```
 
-### AI Assistant
+### 3. Start the server
 
-An interactive chatbot that helps users understand form requirements.
+```bash
+node server.js
+```
 
-Users can ask questions such as:
+### 4. Open in browser
 
-- What documents are required for PAN card?
-- What does AO Code mean?
-- Why was my photo rejected?
+```
+http://localhost:5000
+```
 
-The assistant responds with relevant guidance.
-
----
-
-## Technology Stack
-
-### Frontend
-- HTML
-- CSS
-- JavaScript
-
-### Backend
-- Node.js
-- Express.js
-
-### Libraries
-- Multer — file uploads
-- Sharp — image processing
-- pdf-lib — PDF compression
-- dotenv — environment configuration
-- cors — API access control
-- uuid — unique file names
+> **Note:** `npm install` and `node server.js` are run from the `govguide-ai/` project root.  
+> The root `package.json` points automatically to `backend/server.js`.
 
 ---
 
 ## Project Structure
 
 govguide-ai/
+├── frontend/
+│   ├── index.html          ← Homepage
+│   ├── guides.html         ← Form Guides listing
+│   ├── guide-pan.html      ← PAN Card Guide (8 steps)
+│   ├── tools.html          ← Document Tools
+│   ├── assistant.html      ← AI Chatbot
+│   ├── css/
+│   │   └── styles.css      ← All styles
+│   └── js/
+│       ├── api.js          ← Shared API utility
+│       ├── guides.js       ← Guides page logic
+│       ├── tools.js        ← Tools page logic
+│       └── assistant.js    ← Chatbot logic
+├── backend/
+│   ├── server.js           ← Express server (entry point)
+│   ├── package.json
+│   ├── .env.example
+│   ├── routes/
+│   │   ├── guideRoutes.js
+│   │   ├── toolRoutes.js
+│   │   └── assistantRoutes.js
+│   ├── controllers/
+│   │   ├── guideController.js
+│   │   ├── toolController.js
+│   │   └── assistantController.js
+│   ├── services/
+│   │   ├── imageService.js ← sharp-based image processing
+│   │   ├── pdfService.js   ← pdf-lib PDF compression
+│   │   └── aiService.js    ← Rule-based AI knowledge base
+│   ├── utils/
+│   │   └── fileCleanup.js  ← Auto-delete old uploads
+│   └── uploads/            ← Temporary processed files
+└── README.md
+```
 
-frontend/
-- index.html (Homepage)
-- guides.html (Form Guides listing)
-- guide-pan.html (PAN Card step guide)
-- tools.html (Document tools page)
-- assistant.html (AI chatbot page)
+---
 
-frontend/css/
-- styles.css
+## 🔌 API Endpoints
 
-frontend/js/
-- api.js
-- guides.js
-- tools.js
-- assistant.js
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/health` | Server health check |
+| GET | `/api/guides` | List all form guides |
+| GET | `/api/guides/:id` | Get guide details |
+| GET | `/api/guides/:id/steps` | Get step-by-step content |
+| POST | `/api/tools/resize-photo` | Resize passport photo |
+| POST | `/api/tools/resize-signature` | Resize signature |
+| POST | `/api/tools/compress-pdf` | Compress PDF |
+| POST | `/api/assistant/ask` | Ask AI assistant |
+| GET | `/api/assistant/forms` | List supported forms |
 
-backend/
-- server.js (Express server entry point)
-- package.json
-- .env.example
+---
 
-backend/routes/
-- guideRoutes.js
-- toolRoutes.js
-- assistantRoutes.js
+## 📦 Dependencies
 
-backend/controllers/
-- guideController.js
-- toolController.js
-- assistantController.js
+| Package | Purpose |
+|---------|---------|
+| `express` | Web server framework |
+| `multer` | File upload handling |
+| `sharp` | Image resizing (passport photo, signature) |
+| `pdf-lib` | PDF compression and optimization |
+| `cors` | Cross-origin resource sharing |
+| `dotenv` | Environment variables |
+| `uuid` | Unique file name generation |
 
-backend/services/
-- imageService.js
-- pdfService.js
-- aiService.js
+---
 
-backend/utils/
-- fileCleanup.js
+## ⚙️ Configuration
 
-backend/uploads/
-- temporary processed files
+Copy `.env.example` to `.env` and adjust:
 
-# Installation
+```bash
+cp .env.example .env
+```
 
--npm install #install dependencies
--node server.js #start the server
--https://localhost:5000 #open the web-application
+```env
+PORT=5000
+NODE_ENV=development
+```
+
+---
+
+## 🗜️ Create ZIP Archive
+
+```bash
+cd ..
+zip -r govguide-ai.zip govguide-ai/
+```
+
+---
+
+## ⚠️ Disclaimer
+
+GovGuide AI is an **educational tool only**. It does not process government applications. All actual applications must be submitted on official government portals:
+
+- PAN Card: https://www.onlineservices.nsdl.com
+- Driving License: https://parivahan.gov.in
+- Passport: https://www.passportindia.gov.in
+- Scholarship: https://scholarships.gov.in
+
+---
+
+## 📝 License
+
+MIT — Free for educational and personal use.
