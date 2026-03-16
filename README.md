@@ -1,4 +1,4 @@
-# 🏛️ GovGuide AI
+# GovGuide AI
 
 **A portal that helps people correctly complete government applications.**
 
@@ -6,16 +6,16 @@ GovGuide AI provides step-by-step visual guides, document preparation tools, and
 
 ---
 
-## ✅ Features
+## Features
 
-- **📋 Form Guides** — Visual step-by-step guides for PAN Card (+ more coming soon)
-- **🛠️ Document Tools** — Passport photo resizer, signature resizer, PDF compressor
-- **🤖 AI Assistant** — Chatbot that answers questions about government forms
-- **📱 Responsive** — Works on desktop and mobile
+- **Form Guides** — Visual step-by-step guides for PAN Card (+ more coming soon)
+- **Document Tools** — Passport photo resizer, signature resizer, PDF compressor
+- **AI Assistant** — Chatbot that answers questions about government forms
+- **Responsive** — Works on desktop and mobile
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Extract and enter the project
 
@@ -88,7 +88,7 @@ govguide-ai/
 
 ---
 
-## 🔌 API Endpoints
+## API Endpoints
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
@@ -104,7 +104,7 @@ govguide-ai/
 
 ---
 
-## 📦 Dependencies
+## Dependencies
 
 | Package | Purpose |
 |---------|---------|
@@ -118,7 +118,7 @@ govguide-ai/
 
 ---
 
-## ⚙️ Configuration
+## Configuration
 
 Copy `.env.example` to `.env` and adjust:
 
@@ -133,7 +133,7 @@ NODE_ENV=development
 
 ---
 
-## 🗜️ Create ZIP Archive
+## Create ZIP Archive
 
 ```bash
 cd ..
@@ -142,7 +142,7 @@ zip -r govguide-ai.zip govguide-ai/
 
 ---
 
-## ⚠️ Disclaimer
+## Disclaimer
 
 GovGuide AI is an **educational tool only**. It does not process government applications. All actual applications must be submitted on official government portals:
 
@@ -153,6 +153,6 @@ GovGuide AI is an **educational tool only**. It does not process government appl
 
 ---
 
-## 📝 License
+## License
 
 MIT — Free for educational and personal use.
