@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Assistant — GovGuide AI</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">
+      <div class="nav-logo">🏛️</div>
+      <span class="nav-title">GovGuide AI</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/">Home</a></li>
+      <li><a href="/guides">Form Guides</a></li>
+      <li><a href="/tools">Document Tools</a></li>
+      <li><a href="/assistant" class="nav-cta active">AI Assistant</a></li>
+    </ul>
+    <button class="nav-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')">☰</button>
+  </div>
+</nav>
+
+<div style="background:var(--primary);padding:32px 0;color:white;">
+  <div class="container">
+    <div class="hero-badge" style="margin-bottom:12px;">🤖 AI Assistant</div>
+    <h1 style="color:white;font-size:1.8rem;margin-bottom:8px;">Ask the Government Forms Assistant</h1>
+    <p style="color:rgba(255,255,255,0.8);max-width:520px;margin:0;font-size:0.9rem;">Get instant answers about PAN Card, Passport, Driving License applications and more.</p>
+  </div>
+</div>
+
+<section class="section-sm">
+  <div class="container">
+    <div class="assistant-layout">
+
+      <!-- Sidebar -->
+      <div class="chat-sidebar">
+        <div class="chat-sidebar-header">
+          <h3>Select Form Context</h3>
+          <p>Choose the form you're applying for</p>
+        </div>
+        <div class="form-selector">
+          <div class="form-selector-label">Form Type</div>
+          <button class="form-select-btn active" data-form="general" onclick="selectForm(this, 'general')">
+            <span class="form-select-emoji">🏛️</span>
+            <span class="form-select-name">General Questions</span>
+          </button>
+          <button class="form-select-btn" data-form="pan" onclick="selectForm(this, 'pan')">
+            <span class="form-select-emoji">🪪</span>
+            <span class="form-select-name">PAN Card</span>
+          </button>
+          <button class="form-select-btn" data-form="driving-license" onclick="selectForm(this, 'driving-license')">
+            <span class="form-select-emoji">🚗</span>
+            <span class="form-select-name">Driving License</span>
+          </button>
+          <button class="form-select-btn" data-form="passport" onclick="selectForm(this, 'passport')">
+            <span class="form-select-emoji">📕</span>
+            <span class="form-select-name">Passport</span>
+          </button>
+          <button class="form-select-btn" data-form="scholarship" onclick="selectForm(this, 'scholarship')">
+            <span class="form-select-emoji">🎓</span>
+            <span class="form-select-name">Scholarship</span>
+          </button>
+        </div>
+
+        <div class="quick-questions" id="quickQuestions">
+          <div class="quick-questions-label">Quick Questions</div>
+          <!-- Loaded dynamically based on form selection -->
+        </div>
+      </div>
+
+      <!-- Chat Window -->
+      <div class="chat-window">
+        <div class="chat-header">
+          <div class="chat-avatar">🤖</div>
+          <div class="chat-header-info">
+            <h4>GovGuide AI Assistant</h4>
+            <p><span class="status-dot"></span>Online — Ready to help</p>
+          </div>
+          <button onclick="clearChat()" class="btn btn-outline btn-sm" style="margin-left:auto;">Clear Chat</button>
+        </div>
+
+        <div class="chat-messages" id="chatMessages">
+          <div class="message bot">
+            <div class="message-avatar">🤖</div>
+            <div>
+              <div class="message-bubble">👋 Hello! I'm the GovGuide AI Assistant.
+
+I can help you with questions about Indian government applications like PAN Card, Passport, Driving License, and Scholarships.
+
+Select a form type from the left panel, then ask me anything!
+
+Some things I can help with:
+• What documents are required?
+• How to fill confusing fields (like AO Code)
+• Why applications get rejected
+• Processing times and fees
+• How to track your application</div>
+              <div class="message-time">Just now</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="typing-indicator" id="typingIndicator">
+          <div class="message-avatar" style="background:var(--primary);color:white;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;">🤖</div>
+          <div class="typing-dots">
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+          </div>
+        </div>
+
+        <div class="chat-input-area">
+          <textarea
+            class="chat-input"
+            id="chatInput"
+            placeholder="Ask anything about government applications…"
+            rows="1"
+            onkeydown="handleKeydown(event)"
+            oninput="autoResize(this)"
+          ></textarea>
+          <button class="chat-send-btn" id="sendBtn" onclick="sendMessage()">➤</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand-name">🏛️ GovGuide AI</div>
+        <p class="footer-desc">AI Assistant provides general guidance only. Always verify information on official government portals.</p>
+      </div>
+      <div>
+        <div class="footer-heading">Navigation</div>
+        <ul class="footer-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/guides">Form Guides</a></li>
+          <li><a href="/tools">Document Tools</a></li>
+          <li><a href="/assistant">AI Assistant</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading">Disclaimer</div>
+        <ul class="footer-links">
+          <li><a href="#">Responses are for guidance only</a></li>
+          <li><a href="#">Verify on official portals</a></li>
+          <li><a href="#">Not legal or official advice</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2024 GovGuide AI</span>
+      <span>Educational purposes only</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast-container" id="toastContainer"></div>
+<script src="/js/api.js"></script>
+<script src="/js/assistant.js"></script>
+</body>
+</html>

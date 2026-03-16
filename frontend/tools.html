@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document Tools — GovGuide AI</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">
+      <div class="nav-logo">🏛️</div>
+      <span class="nav-title">GovGuide AI</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/">Home</a></li>
+      <li><a href="/guides">Form Guides</a></li>
+      <li><a href="/tools" class="active">Document Tools</a></li>
+      <li><a href="/assistant" class="nav-cta">AI Assistant</a></li>
+    </ul>
+    <button class="nav-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')">☰</button>
+  </div>
+</nav>
+
+<div style="background:var(--primary);padding:48px 0;color:white;">
+  <div class="container">
+    <div class="hero-badge" style="margin-bottom:12px;">🛠️ Document Tools</div>
+    <h1 style="color:white;margin-bottom:8px;">Prepare Your Documents</h1>
+    <p style="color:rgba(255,255,255,0.8);max-width:520px;">Resize photos and signatures, compress PDFs to exact government specifications — instantly, for free.</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div class="tools-grid">
+
+      <!-- Tool 1: Passport Photo Resizer -->
+      <div class="tool-card">
+        <div class="tool-card-header">
+          <div class="tool-icon">📸</div>
+          <div>
+            <div class="card-title">Passport Photo Resizer</div>
+            <div class="card-subtitle">Resize your photo to exact government specifications</div>
+          </div>
+        </div>
+        <div class="tool-card-body">
+          <div style="margin-bottom:16px;">
+            <label style="font-size:0.85rem;font-weight:600;color:var(--gray-700);display:block;margin-bottom:6px;">Select Document Type</label>
+            <select id="photoDocType" style="width:100%;padding:8px 12px;border:1.5px solid var(--gray-200);border-radius:var(--radius-sm);font-family:inherit;font-size:0.875rem;color:var(--gray-700);outline:none;">
+              <option value="pan">PAN Card (30×40mm, max 50KB)</option>
+              <option value="passport">Passport (35×45mm, max 50KB)</option>
+              <option value="driving-license">Driving License (30×40mm, max 50KB)</option>
+              <option value="scholarship">Scholarship (30×40mm, max 50KB)</option>
+            </select>
+          </div>
+
+          <div class="upload-area" id="photoUploadArea" onclick="document.getElementById('photoInput').click()">
+            <div class="upload-icon">📸</div>
+            <div class="upload-title">Click to upload or drag & drop</div>
+            <div class="upload-sub">JPEG or PNG • Max 10MB</div>
+            <input type="file" id="photoInput" accept="image/jpeg,image/png,image/jpg" style="display:none" onchange="handlePhotoUpload(this)" />
+          </div>
+
+          <div class="specs-grid" style="margin-top:12px;">
+            <div class="spec-item"><div class="spec-label">Output Size</div><div class="spec-value" id="photoSpecSize">30×40mm</div></div>
+            <div class="spec-item"><div class="spec-label">Max File</div><div class="spec-value">50KB</div></div>
+            <div class="spec-item"><div class="spec-label">Format</div><div class="spec-value">JPEG</div></div>
+            <div class="spec-item"><div class="spec-label">Background</div><div class="spec-value">White</div></div>
+          </div>
+
+          <div class="tool-result" id="photoResult">
+            <div class="tool-result-label">✅ Photo Ready</div>
+            <div class="tool-result-filename" id="photoFilename"></div>
+            <div class="tool-result-specs" id="photoSpecs"></div>
+            <a id="photoDownload" href="#" class="btn btn-primary btn-full" style="margin-top:12px;">⬇️ Download Photo</a>
+          </div>
+
+          <button id="photoBtn" class="btn btn-primary btn-full" style="margin-top:16px;" onclick="uploadPhoto()" disabled>
+            Resize Photo
+          </button>
+        </div>
+      </div>
+
+      <!-- Tool 2: Signature Resizer -->
+      <div class="tool-card">
+        <div class="tool-card-header">
+          <div class="tool-icon">✍️</div>
+          <div>
+            <div class="card-title">Signature Resizer</div>
+            <div class="card-subtitle">Resize your signature to exact government specifications</div>
+          </div>
+        </div>
+        <div class="tool-card-body">
+          <div style="margin-bottom:16px;">
+            <label style="font-size:0.85rem;font-weight:600;color:var(--gray-700);display:block;margin-bottom:6px;">Select Document Type</label>
+            <select id="sigDocType" style="width:100%;padding:8px 12px;border:1.5px solid var(--gray-200);border-radius:var(--radius-sm);font-family:inherit;font-size:0.875rem;color:var(--gray-700);outline:none;">
+              <option value="pan">PAN Card (70×20mm, max 30KB)</option>
+              <option value="passport">Passport (50×15mm, max 30KB)</option>
+            </select>
+          </div>
+
+          <div class="upload-area" id="sigUploadArea" onclick="document.getElementById('sigInput').click()">
+            <div class="upload-icon">✍️</div>
+            <div class="upload-title">Click to upload signature image</div>
+            <div class="upload-sub">JPEG or PNG • Signature on white paper</div>
+            <input type="file" id="sigInput" accept="image/jpeg,image/png,image/jpg" style="display:none" onchange="handleSigUpload(this)" />
+          </div>
+
+          <div class="specs-grid" style="margin-top:12px;">
+            <div class="spec-item"><div class="spec-label">Output Size</div><div class="spec-value">70×20mm</div></div>
+            <div class="spec-item"><div class="spec-label">Max File</div><div class="spec-value">30KB</div></div>
+            <div class="spec-item"><div class="spec-label">Format</div><div class="spec-value">JPEG</div></div>
+            <div class="spec-item"><div class="spec-label">Background</div><div class="spec-value">White</div></div>
+          </div>
+
+          <div class="tool-result" id="sigResult">
+            <div class="tool-result-label">✅ Signature Ready</div>
+            <div class="tool-result-filename" id="sigFilename"></div>
+            <div class="tool-result-specs" id="sigSpecs"></div>
+            <a id="sigDownload" href="#" class="btn btn-primary btn-full" style="margin-top:12px;">⬇️ Download Signature</a>
+          </div>
+
+          <button id="sigBtn" class="btn btn-primary btn-full" style="margin-top:16px;" onclick="uploadSignature()" disabled>
+            Resize Signature
+          </button>
+        </div>
+      </div>
+
+      <!-- Tool 3: PDF Compressor -->
+      <div class="tool-card">
+        <div class="tool-card-header">
+          <div class="tool-icon">📄</div>
+          <div>
+            <div class="card-title">PDF Compressor</div>
+            <div class="card-subtitle">Reduce PDF file size for government portal uploads</div>
+          </div>
+        </div>
+        <div class="tool-card-body">
+          <div class="info-box" style="margin-bottom:16px;">
+            <p style="font-size:0.82rem;margin:0;color:var(--gray-600);">Most government portals limit document uploads to <strong>300KB–1MB</strong>. Use this tool to compress your scanned documents before uploading.</p>
+          </div>
+
+          <div class="upload-area" id="pdfUploadArea" onclick="document.getElementById('pdfInput').click()">
+            <div class="upload-icon">📄</div>
+            <div class="upload-title">Click to upload PDF document</div>
+            <div class="upload-sub">PDF only • Max 10MB</div>
+            <input type="file" id="pdfInput" accept="application/pdf" style="display:none" onchange="handlePdfUpload(this)" />
+          </div>
+
+          <div class="specs-grid" style="margin-top:12px;">
+            <div class="spec-item"><div class="spec-label">Input</div><div class="spec-value">Any PDF</div></div>
+            <div class="spec-item"><div class="spec-label">Output</div><div class="spec-value">Optimized PDF</div></div>
+            <div class="spec-item"><div class="spec-label">Format</div><div class="spec-value">PDF/A</div></div>
+            <div class="spec-item"><div class="spec-label">Metadata</div><div class="spec-value">Removed</div></div>
+          </div>
+
+          <div class="tool-result" id="pdfResult">
+            <div class="tool-result-label">✅ PDF Compressed</div>
+            <div class="tool-result-filename" id="pdfFilename"></div>
+            <div class="tool-result-specs" id="pdfSpecs"></div>
+            <a id="pdfDownload" href="#" class="btn btn-primary btn-full" style="margin-top:12px;">⬇️ Download PDF</a>
+          </div>
+
+          <button id="pdfBtn" class="btn btn-primary btn-full" style="margin-top:16px;" onclick="uploadPdf()" disabled>
+            Compress PDF
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Tips Section -->
+    <div style="margin-top:40px;">
+      <h2 style="margin-bottom:20px;">📋 Document Specifications Quick Reference</h2>
+      <div style="overflow-x:auto;">
+        <table class="docs-table" style="min-width:600px;">
+          <thead>
+            <tr>
+              <th>Document</th>
+              <th>Form</th>
+              <th>Size (mm)</th>
+              <th>Max File Size</th>
+              <th>Format</th>
+              <th>Background</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Passport Photo</td><td>PAN Card</td><td>30×40mm</td><td>50KB</td><td>JPEG</td><td>White</td></tr>
+            <tr><td>Passport Photo</td><td>Passport</td><td>35×45mm</td><td>50KB</td><td>JPEG</td><td>White</td></tr>
+            <tr><td>Passport Photo</td><td>Driving License</td><td>30×40mm</td><td>50KB</td><td>JPEG</td><td>White</td></tr>
+            <tr><td>Signature</td><td>PAN Card</td><td>70×20mm</td><td>30KB</td><td>JPEG</td><td>White</td></tr>
+            <tr><td>Signature</td><td>Passport</td><td>50×15mm</td><td>30KB</td><td>JPEG</td><td>White</td></tr>
+            <tr><td>Identity Proof</td><td>All Forms</td><td>—</td><td>300KB</td><td>PDF/JPEG</td><td>—</td></tr>
+            <tr><td>Address Proof</td><td>All Forms</td><td>—</td><td>300KB</td><td>PDF/JPEG</td><td>—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand-name">🏛️ GovGuide AI</div>
+        <p class="footer-desc">All processing is done on our server. Files are automatically deleted after 2 hours.</p>
+      </div>
+      <div>
+        <div class="footer-heading">Navigation</div>
+        <ul class="footer-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/guides">Form Guides</a></li>
+          <li><a href="/tools">Document Tools</a></li>
+          <li><a href="/assistant">AI Assistant</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading">Privacy</div>
+        <ul class="footer-links">
+          <li><a href="#">Files auto-deleted in 2 hours</a></li>
+          <li><a href="#">No data stored permanently</a></li>
+          <li><a href="#">No account required</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2024 GovGuide AI</span>
+      <span>Educational purposes only</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="/js/api.js"></script>
+<script src="/js/tools.js"></script>
+</body>
+</html>
